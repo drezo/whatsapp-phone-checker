@@ -3,7 +3,7 @@ const { Server } = require("./bin");
 
 const serverInstance = promisify(Server.listen.bind(Server));
 
-const SERVER_PORT = 4000;
+const { SERVER_PORT } = process.env;
 
 (async () => {
   try {
