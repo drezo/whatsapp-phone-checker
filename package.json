@@ -4,7 +4,7 @@
   "description": "WhatsApp Auto Checker Phones",
   "main": "src/index.js",
   "scripts": {
-    "serve": "node src/index.js"
+    "serve": "cross-env node src/index.js"
   },
   "repository": "git@github.com:drezo/whatsapp-phone-checker.git",
   "author": "Drez0 <alexandr.fdh@gmail.com>",
@@ -13,5 +13,8 @@
   "dependencies": {
     "dotenv": "^7.0.0",
     "koa": "^2.7.0"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0"
   }
 }
