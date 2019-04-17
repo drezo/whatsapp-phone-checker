@@ -7,7 +7,9 @@
     "dev": "cross-env nodemon -e yaml,js,json -w locales -w src ./src",
     "test": "yarn format && yarn test:lint",
     "test:lint": "eslint src",
-    "format": "prettier --config .prettierrc.json --write \"src/**/*.js\""
+    "format": "prettier --config .prettierrc.json --write \"src/**/*.js\"",
+    "prepush": "yarn test",
+    "precommit": "yarn test"
   },
   "repository": "git@github.com:drezo/whatsapp-phone-checker.git",
   "author": "Drez0 <alexandr.fdh@gmail.com>",
@@ -24,6 +26,7 @@
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-prettier": "^3.0.1",
+    "husky": "^1.3.1",
     "nodemon": "^1.18.11",
     "prettier": "^1.17.0"
   }
