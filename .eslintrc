@@ -4,8 +4,13 @@
     "commonjs": true,
     "es6": true
   },
-  "extends": ["airbnb-base", "plugin:import/errors", "plugin:import/warnings"],
-  "plugins": ["import"],
+  "extends": [
+    "airbnb-base",
+    "prettier",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "plugins": ["prettier", "import"],
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module"
@@ -15,6 +20,7 @@
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
+    "prettier/prettier": "error",
     "import/no-unresolved": [
       2,
       {

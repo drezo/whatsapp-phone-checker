@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "serve": "cross-env node src/index.js",
-    "test": "eslint src"
+    "test": "yarn format && yarn test:lint",
+    "test:lint": "eslint src",
+    "format": "prettier --config .prettierrc.json --write \"src/**/*.js\""
   },
   "repository": "git@github.com:drezo/whatsapp-phone-checker.git",
   "author": "Drez0 <alexandr.fdh@gmail.com>",
@@ -19,6 +21,9 @@
     "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.2"
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.17.0"
   }
 }

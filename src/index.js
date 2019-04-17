@@ -10,7 +10,7 @@ const serverInstance = promisify(Server.listen.bind(Server));
     await serverInstance(SERVER_PORT);
     // eslint-disable-next-line no-console
     console.log(
-      `🚀 Server ready at https://localhost:${SERVER_PORT} (mode: ${NODE_ENV})`,
+      `🚀 Server ready at https://localhost:${SERVER_PORT} (mode: ${NODE_ENV})`
     );
   } catch (err) {
     // eslint-disable-next-line no-console
