@@ -1,0 +1,10 @@
+{
+  "name": "whatsapp-phone-checker",
+  "version": "1.0.0",
+  "description": "WhatsApp Auto Checker Phones",
+  "main": "src/index.js",
+  "repository": "git@github.com:drezo/whatsapp-phone-checker.git",
+  "author": "Drez0 <alexandr.fdh@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
