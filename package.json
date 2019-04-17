@@ -4,7 +4,8 @@
   "description": "WhatsApp Auto Checker Phones",
   "main": "src/index.js",
   "scripts": {
-    "serve": "cross-env node src/index.js"
+    "serve": "cross-env node src/index.js",
+    "test": "eslint src"
   },
   "repository": "git@github.com:drezo/whatsapp-phone-checker.git",
   "author": "Drez0 <alexandr.fdh@gmail.com>",
