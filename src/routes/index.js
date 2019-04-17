@@ -2,7 +2,11 @@ const Router = require('koa-router');
 
 const router = new Router();
 
-router.get('/', async ctx => {
+router.get('/robots.txt', ctx => {
+  ctx.body = 'User-agent: *\nDisallow: /';
+});
+
+router.get('/_health', ctx => {
   ctx.body = { success: true };
 });
 
