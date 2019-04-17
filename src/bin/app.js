@@ -1,5 +1,6 @@
 const Koa = require('koa');
 const helmet = require('koa-helmet');
+const router = require('../routes');
 
 const app = new Koa();
 
@@ -12,5 +13,8 @@ if (isProduction) {
 }
 
 app.use(helmet());
+
+app.use(router.routes());
+app.use(router.allowedMethods());
 
 module.exports = app;
