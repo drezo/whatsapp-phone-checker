@@ -1,7 +1,7 @@
-require("./dotenv");
+require('./dotenv');
 
-const Server = require("./server");
+const Server = require('./server');
 
 module.exports = {
-  Server
+  Server,
 };
