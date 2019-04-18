@@ -2,10 +2,19 @@ const debug = require('debug')('wa:ws');
 
 const WebSocket = require('ws');
 
+const INITIALIZATION_KEY = 'MzdzBoyeimWLlPBYnqUUgQ==';
+
 const DEFAULT_ENDPOINT_WS = 'wss://w5.web.whatsapp.com/ws';
 
 const DEFAULT_USER_AGENT =
   'Mozilla/5.0 (compatible, MSIE 11, Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko';
+
+const getUnixTime = () => Number.parseInt(new Date().getTime() / 1000, 10);
+
+const generateInitBody = () => {
+  const unixtime = getUnixTime();
+  return `${unixtime}.--0,["admin","init",[0,3,2846],["Mac OS 10.14.2","IE"],"${INITIALIZATION_KEY}",true]`;
+};
 
 const start = () => {
   const wss = new WebSocket(DEFAULT_ENDPOINT_WS, {
@@ -20,6 +29,9 @@ const start = () => {
 
   wss.on('open', () => {
     debug('[WS]: Open');
+    const dataInit = generateInitBody();
+    debug('[WS]: initizalization data: ', dataInit);
+    wss.send(dataInit);
   });
 };
 
