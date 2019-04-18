@@ -1,6 +1,6 @@
 const Koa = require('koa');
 const helmet = require('koa-helmet');
-const { pageNotFound } = require('../middlewares');
+const { pageNotFound, errorHandling } = require('../middlewares');
 const router = require('../routes');
 
 const app = new Koa();
@@ -12,6 +12,8 @@ const isProduction = NODE_ENV === 'production';
 if (isProduction) {
   app.proxy = true; // eg header 'X-Forwarded-Host'
 }
+
+app.use(errorHandling());
 
 app.use(helmet());
 
