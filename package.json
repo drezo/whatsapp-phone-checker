@@ -5,6 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "cross-env nodemon -e yaml,js,json -w locales -w src ./src",
+    "debug:ws": "cross-env DEBUG=wa:ws nodemon -e yaml,js,json -w locales -w src ./src",
+    "debug:all": "cross-env DEBUG=wa:* nodemon -e yaml,js,json -w locales -w src ./src",
     "test": "yarn format && yarn test:lint",
     "test:lint": "eslint src",
     "format": "prettier --config .prettierrc.json --write \"src/**/*.js\"",
@@ -16,10 +18,12 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "debug": "^4.1.1",
     "dotenv": "^7.0.0",
     "koa": "^2.7.0",
     "koa-helmet": "^4.1.0",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "ws": "^6.2.1"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",

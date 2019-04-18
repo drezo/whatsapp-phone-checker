@@ -1,6 +1,8 @@
 const { promisify } = require('util');
 const { Server } = require('./bin');
 
+const WA = require('./lib/wa');
+
 const { NODE_ENV, SERVER_PORT } = process.env;
 
 const serverInstance = promisify(Server.listen.bind(Server));
@@ -8,6 +10,7 @@ const serverInstance = promisify(Server.listen.bind(Server));
 (async () => {
   try {
     await serverInstance(SERVER_PORT);
+    WA.start();
     // eslint-disable-next-line no-console
     console.log(
       `🚀 Server ready at https://localhost:${SERVER_PORT} (mode: ${NODE_ENV})`
