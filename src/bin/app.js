@@ -1,5 +1,6 @@
 const Koa = require('koa');
 const helmet = require('koa-helmet');
+const { pageNotFound } = require('../middlewares');
 const router = require('../routes');
 
 const app = new Koa();
@@ -16,5 +17,7 @@ app.use(helmet());
 
 app.use(router.routes());
 app.use(router.allowedMethods());
+
+app.use(pageNotFound);
 
 module.exports = app;
