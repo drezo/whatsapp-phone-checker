@@ -72,7 +72,10 @@ const start = () => {
 
   wss.on('message', async data => {
     debug('[WS]: Message');
-    const { code, body } = parseMessage(data);
+    const { type, code, body } = parseMessage(data);
+    if (type === 'Conn' && code === 's1') {
+      debug('[WS]: success auth');
+    }
     if (code && code === '--0' && body && body.ref) {
       const unixtime = getUnixTime();
       const { ref } = body;
