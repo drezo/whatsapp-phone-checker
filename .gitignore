@@ -63,4 +63,7 @@ typings/
 # dotenv environment variables file
 .env
 
+#temp folder for images
+temp/
+
 # End of https://www.gitignore.io/api/node
