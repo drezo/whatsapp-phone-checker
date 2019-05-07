@@ -20,17 +20,29 @@ const generateInitBody = () => {
 
 const parseMessage = message => {
   try {
-    const [firstPart, ...splitJson] = message.split(',');
-    const textJson = splitJson.join(',');
-    const body = JSON.parse(textJson);
+    if (typeof message === 'string') {
+      const [firstPart, ...splitJson] = message.split(',');
+      const textJson = splitJson.join(',');
+      const body = JSON.parse(textJson);
 
-    const [time, code] = firstPart.split('.');
+      const [time, code = null] = firstPart.split('.');
 
-    return {
-      time,
-      code,
-      body
-    };
+      if (Array.isArray(body)) {
+        const [type, json] = body;
+        return {
+          type,
+          time,
+          code,
+          body: json
+        };
+      }
+      return {
+        time,
+        code,
+        body
+      };
+    }
+    return {};
   } catch (err) {
     return {};
   }
