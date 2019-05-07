@@ -16,6 +16,24 @@ const generateInitBody = () => {
   return `${unixtime}.--0,["admin","init",[0,3,2846],["Mac OS 10.14.2","IE"],"${INITIALIZATION_KEY}",true]`;
 };
 
+const parseMessage = message => {
+  try {
+    const [firstPart, ...splitJson] = message.split(',');
+    const textJson = splitJson.join(',');
+    const body = JSON.parse(textJson);
+
+    const [time, code] = firstPart.split('.');
+
+    return {
+      time,
+      code,
+      body
+    };
+  } catch (err) {
+    return {};
+  }
+};
+
 const start = () => {
   const wss = new WebSocket(DEFAULT_ENDPOINT_WS, {
     headers: {
@@ -32,6 +50,14 @@ const start = () => {
     const dataInit = generateInitBody();
     debug('[WS]: initizalization data: ', dataInit);
     wss.send(dataInit);
+  });
+
+  wss.on('message', async data => {
+    debug('[WS]: Message');
+    const { code, body } = parseMessage(data);
+    if (code && code === '--0' && body && body.ref) {
+      debug('generate: qr code');
+    }
   });
 };
 
