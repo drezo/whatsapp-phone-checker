@@ -2,7 +2,8 @@ const debug = require('debug')('wa:ws');
 
 const WebSocket = require('ws');
 
-const INITIALIZATION_KEY = 'MzdzBoyeimWLlPBYnqUUgQ==';
+const SHORT_KEY = 'MzdzBoyeimWLlPBYnqUUgQ==';
+const LONG_KEY = '2bCVucKfvMB9oJqeGJ6YQuLNxpQAfTmySSs4zmXtUic=';
 
 const DEFAULT_ENDPOINT_WS = 'wss://w5.web.whatsapp.com/ws';
 
@@ -13,7 +14,7 @@ const getUnixTime = () => Number.parseInt(new Date().getTime() / 1000, 10);
 
 const generateInitBody = () => {
   const unixtime = getUnixTime();
-  return `${unixtime}.--0,["admin","init",[0,3,2846],["Mac OS 10.14.2","IE"],"${INITIALIZATION_KEY}",true]`;
+  return `${unixtime}.--0,["admin","init",[0,3,2846],["Mac OS 10.14.2","IE"],"${SHORT_KEY}",true]`;
 };
 
 const parseMessage = message => {
@@ -56,7 +57,9 @@ const start = () => {
     debug('[WS]: Message');
     const { code, body } = parseMessage(data);
     if (code && code === '--0' && body && body.ref) {
-      debug('generate: qr code');
+      const { ref } = body;
+      const dataQr = `${ref},${LONG_KEY},${SHORT_KEY}`;
+      debug(`[WS:qr] generate: ${dataQr}`);
     }
   });
 };
