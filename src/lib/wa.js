@@ -1,6 +1,7 @@
 const debug = require('debug')('wa:ws');
 
 const WebSocket = require('ws');
+const Qr = require('./qr');
 
 const SHORT_KEY = 'MzdzBoyeimWLlPBYnqUUgQ==';
 const LONG_KEY = '2bCVucKfvMB9oJqeGJ6YQuLNxpQAfTmySSs4zmXtUic=';
@@ -57,9 +58,15 @@ const start = () => {
     debug('[WS]: Message');
     const { code, body } = parseMessage(data);
     if (code && code === '--0' && body && body.ref) {
+      const unixtime = getUnixTime();
       const { ref } = body;
-      const dataQr = `${ref},${LONG_KEY},${SHORT_KEY}`;
-      debug(`[WS:qr] generate: ${dataQr}`);
+      const keyQr = `${ref},${LONG_KEY},${SHORT_KEY}`;
+      const qr = await Qr.generate(keyQr);
+      const base64Data = qr.replace(/^data:image\/png;base64,/, '');
+      await Qr.saveToTmp(`qr-${unixtime}.png`, base64Data);
+      const dataReref = `${unixtime}.--1,["admin","Conn","reref"]`;
+      debug(`[WS:send] data: ${dataReref}`);
+      wss.send(dataReref);
     }
   });
 };
