@@ -25,21 +25,25 @@ const parseMessage = message => {
       const textJson = splitJson.join(',');
       const body = JSON.parse(textJson);
 
-      const [time, code = null] = firstPart.split('.');
+      const firstPartArray = firstPart.split('.');
+      const firstPartArrayLength = firstPartArray.length;
+
+      const timeWithCode =
+        firstPartArrayLength === 1
+          ? { time: null, code: firstPartArray[0] }
+          : { time: firstPartArray[0], code: firstPartArray[1] };
 
       if (Array.isArray(body)) {
         const [type, json] = body;
         return {
           type,
-          time,
-          code,
-          body: json
+          body: json,
+          ...timeWithCode
         };
       }
       return {
-        time,
-        code,
-        body
+        body,
+        ...timeWithCode
       };
     }
     return {};
